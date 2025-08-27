@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/normalize.css">
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="shortcut icon" type="image/png" href="./images/favicon.png"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>{{ .PersonInfo.Name }} {{ .PersonInfo.Surname }} | {{ .Position }}</title>
+</head>
+<body>
+    <div class="flex-container">
+        <div id="cv-container">
+            <div  class="header">
+                <div class="personal-info">
+                    <div class="initials">
+                        <p id="employee"><span>{{ .PersonInfo.Name }}</span> {{ .PersonInfo.Surname }}</p>
+                    </div>
+                    <div class="position">
+                        <p>{{ .Position }}</p>
+                    </div>
+                </div>
+                <div class="contacts">
+                    <ul>
+                        <li><a href="tel://{{ .ContactInformation.PhoneNumber }}"> {{ .ContactInformation.PhoneNumber }} </a><img src="./images/smartphone.png" alt=""></li>
+                        <li><a href="mailto:{{ .ContactInformation.Email }}">{{ .ContactInformation.Email }}</a><img src="./images/email.png" alt=""></li>
+                        <li><a href="#">{{ .PersonInfo.City }}</a><img src="./images/location.png" alt=""></li>
+                        <li><a href="{{ .ContactInformation.Linkedin }}">Linkedin</a><img src="./images/linkedin.png" alt=""></li>
+                        <li><a href="{{ .ContactInformation.Github }}">GitHub</a><img src="./images/github.png" alt=""></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="main">
+                <div class="aside">
+                    <div class="education">
+                        <p class="title">education</p>
+                        {{ range .Education }}
+                            <div class="university">
+                                <p class="subtitle">{{ .Specialty }}</p>
+                                <p>{{ .University }}, {{ .Faculty }}</p>
+                                <p>{{ .StartDate }} - {{ .EndDate }}</p>
+                            </div>
+                        {{ end }}
+                    </div>
+                    <div class="additional-education">
+                        <p class="title">additional education</p>
+                        <ul>
+                            {{ range .AdditionalEducation }}
+                                <li>{{ . }}</li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                    <div class="skills">
+                        <p class="title">skills</p>
+                        <div>
+                            <p class="subtitle">professional</p>
+                            <ul>
+                                {{ range .SoftSkills }}
+                                    <li>{{ . }}</li>
+                                {{end}}
+                            </ul>
+                            <p class="subtitle">technical</p>
+                            <ul>
+                                {{ range .SoftSkills }}
+                                    <li>{{ . }}</li>
+                                {{ end }}
+                            </ul>
+                        </div>
+    
+                    </div>
+                    <div class="languages">
+                        <p class="title">language</p>
+                        {{ range .Language }}
+                            <div class="lang">
+                                <p class="subtitle">{{ .Language }}</p>
+                                <p class="level">{{ .Level }}</p>
+                            </div>
+                        {{ end }}
+                    </div>
+                    <div class="hobby">
+                        <p class="title">hobbies</p>
+                        <ul>
+                            {{ range .Hobby }}
+                                <li>{{ . }}</li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="profile">
+                        <p class="title">profile</p>
+                        <p>{{ .PersonInfo.Profile }}</p>
+                    </div>
+                    <div class="experience">
+                        <p class="title">experience</p>
+                        {{ range .WorkExperience }}
+                        <div class="item">
+                            <p class="subtitle">{{ .Position }}</p>
+                            <p class="company">{{ .Company }}, {{ .City }}<span> | </span>{{ .StartDate }} - {{ .EndDate }} </p>
+                            <p class="description">{{ .Description }}</p>
+                            <ul class="responsibilities">
+                                {{ range .Responsibility }}
+                                    <li>{{ . }}</li>
+                                {{ end }}
+                            </ul>
+                        </div>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Export to pdf floating button -->
+    <a href="#" id="export-btn" class="export-button"><img src="./images/export.png" alt="export"></a>
+    <!-- Export to pdf button onClick handler  -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script> -->
+    <script src="./scripts/html2pdf.bundle.min.js"></script>
+    <script src="./scripts/export2pdf.js"></script>
+</body>
+</html>
