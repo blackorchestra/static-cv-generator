@@ -1,4 +1,4 @@
-# CV Generator App
+# CV Generator
 
 **Demo CV Template** - A static CV/resume generator that converts data from JSON to beautiful HTML with PDF export capability. This is a template project that you can fork and customize with your own information.
 
